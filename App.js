@@ -7,15 +7,53 @@ import {
 
 import RemotePushController from './src/services/RemotePushController'
 import Share1 from 'react-native-share';
-const App = () => {
-  const handleButtonPress = () => {
+
+
+
+
+
+
+export default class App extends React.Component {
+
+
+
+
+
+  componentDidMount() {
+    let auth={
+      url:"https://resources.vega6.info/get-photo/search",
+      method: "GET",
+      headers: {
+        "Accept":"application/json",
+        "Authorization":"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MDAyNTUxOTIsImp0aSI6IkNmc0lJRmYxWm43TUNJdUJrS2pKVVEiLCJpc3MiOiJodHRwczpcL1wvcmVzb3VyY2VzLnZlZ2E2LmluZm9cLyIsIm5iZiI6MTYwMDI1NTIwMiwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsImFwcF91cmwiOiJOVWxsIn19.Y4UpB0--8kQWHFHrONhyJy_jGl3VmDZ93Y-qn7yD6tLZRmzktXeIf4YTdraNIMrYTucuVYLB6VrWVhN4TrZpaA"      }
+    }
+    console.log('====================================');
+    console.log("authh",auth);
+    console.log('====================================');
+    fetch(auth).then((response) => {
+      console.log('-------', response);
+      
+    })
+      .catch((error) => {
+
+        console.log("ERROR ", error)
+      })
+                                        
+
+  }
+
+
+
+
+
+   handleButtonPress = () => {
     LocalNotification()
    }
 
-  const handleScheduleNotification = () => {
+ handleScheduleNotification = () => {
     ScheduledLocalNotification()
   }
-  const onShare = async () => {
+   onShare = async () => {
     try {
       const result = await Share.share({
         message:
@@ -36,7 +74,7 @@ const App = () => {
     }
   };
 
-  const shareEmailImage = async () => {
+   shareEmailImage = async () => {
     const shareOptions = {
       title: 'Share file',
       email: 'email@example.com',
@@ -55,27 +93,35 @@ const App = () => {
     }
   };
 
-  return (
-    <View style={styles.container}>
+  render() {
+    return (
+      <View style={styles.container}>
       <Text>Press a button to trigger the notification</Text>
-      <View style={{ marginTop: 20 }}>
-        <Button title={'Local Push Notification'} onPress={handleButtonPress} />
+      {/* <View style={{ marginTop: 20 }}>
+        <Button title={'Local Push Notification'} onPress={()=>this.handleButtonPress()} />
       </View>
       <View style={{ marginTop: 20 }}>
         <Button
           title={'Scheduled Local Push Notification'}
-          onPress={handleScheduleNotification}
+          onPress={()=>this.handleScheduleNotification()}
         />
 
       </View>
-      <Button onPress={onShare} title="Share" />
+      <Button onPress={()=>this.onShare()} title="Share" />
 
 
-      <RemotePushController />
-    </View>
-  )
+      <RemotePushController /> */}
+
+
+
+
+
+
+      
+      </View>
+    )
+  }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -87,4 +133,3 @@ const styles = StyleSheet.create({
   }
 })
 
-export default App
