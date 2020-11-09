@@ -20,24 +20,35 @@ export default class App extends React.Component {
 
 
   componentDidMount() {
-    let auth={
-      url:"https://resources.vega6.info/get-photo/search",
+
+    fetch("https://resources.vega6.info/get-photo/search",
+     {
       method: "GET",
+      mode: "cors",
       headers: {
-        "Accept":"application/json",
-        "Authorization":"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MDAyNTUxOTIsImp0aSI6IkNmc0lJRmYxWm43TUNJdUJrS2pKVVEiLCJpc3MiOiJodHRwczpcL1wvcmVzb3VyY2VzLnZlZ2E2LmluZm9cLyIsIm5iZiI6MTYwMDI1NTIwMiwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsImFwcF91cmwiOiJOVWxsIn19.Y4UpB0--8kQWHFHrONhyJy_jGl3VmDZ93Y-qn7yD6tLZRmzktXeIf4YTdraNIMrYTucuVYLB6VrWVhN4TrZpaA"      }
+        "Content-type": "application/json",
+        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MDAyNTUxOTIsImp0aSI6IkNmc0lJRmYxWm43TUNJdUJrS2pKVVEiLCJpc3MiOiJodHRwczpcL1wvcmVzb3VyY2VzLnZlZ2E2LmluZm9cLyIsIm5iZiI6MTYwMDI1NTIwMiwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsImFwcF91cmwiOiJOVWxsIn19.Y4UpB0--8kQWHFHrONhyJy_jGl3VmDZ93Y-qn7yD6tLZRmzktXeIf4YTdraNIMrYTucuVYLB6VrWVhN4TrZpaA`,
+      },
     }
-    console.log('====================================');
-    console.log("authh",auth);
-    console.log('====================================');
-    fetch(auth).then((response) => {
-      console.log('-------', response);
-      
+    ).then((res) => res.json())
+      .then((res) => {
+        console.log('-------', res);      
+
     })
       .catch((error) => {
 
         console.log("ERROR ", error)
       })
+           
+
+    // fetch(auth).then((response) => {
+    //   console.log('-------', response);
+      
+    // })
+    //   .catch((error) => {
+
+    //     console.log("ERROR ", error)
+    //   })
                                         
 
   }
@@ -117,7 +128,7 @@ export default class App extends React.Component {
 
 
 
-      
+
       </View>
     )
   }
