@@ -1,16 +1,35 @@
 import PushNotification from 'react-native-push-notification'
+import Share from 'react-native-share';
 
-PushNotification.configure({
-  // (required) Called when a remote or local notification is opened or received
-  onNotification: function(notification) {
-    console.log('LOCAL NOTIFICATION ==>', notification)
-  },
+// PushNotification.configure({
+//   // (required) Called when a remote or local notification is opened or received
+//   onNotification: function(notification) {
+//     console.log('LOCAL NOTIFICATION ==>', notification)
+//   },
 
-  popInitialNotification: true,
-  requestPermissions: true
-})
+//   popInitialNotification: true,
+//   requestPermissions: true
+// })
 
-export const LocalNotification = () => {
+const shareEmailImage = async (url) => {
+  alert(url)
+  const shareOptions = {
+    title: 'Share file',
+    email: 'email@example.com', 
+    social: Share.Social.EMAIL, 
+    failOnCancel: false,
+    urls:[ url],
+  };
+
+  try {
+    const ShareResponse = await Share.open(shareOptions);
+  } catch (error) {
+    console.log('Error =>', error);
+  }
+};
+
+export const LocalNotification = (item) => {
+  
   PushNotification.localNotification({
     autoCancel: true,
     bigText:
@@ -24,6 +43,18 @@ export const LocalNotification = () => {
     soundName: 'default',
     actions: '["Yes", "No"]'
   })
+  PushNotification.configure({
+    // (required) Called when a remote or local notification is opened or received
+    onNotification: function(notification) {
+      console.log('LOCAL NOTIFICATION123 ==>', notification,"item",item)
+      shareEmailImage(item.url)
+      // alert(item.url)
+    },
+  
+    popInitialNotification: true,
+    requestPermissions: true
+  })
+  
 }
 
 
