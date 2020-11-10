@@ -10,6 +10,7 @@ import Share1 from 'react-native-share';
 
 import { Icon } from "react-native-elements";
 
+import RNFS from 'react-native-fs';
 
 import { createFilter } from 'react-native-search-filter';
 
@@ -32,6 +33,13 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+
+    RNFS.readFile("https://s3-us-west-2.amazonaws.com/mediaapidata/images/Soul+Scenes/soul+scenes+057_result.jpg", 'base64')
+    .then(res =>{
+      console.log("base64",res);
+    });
+    
+
     this.getImageData()
   }
   getImageData() {
@@ -92,24 +100,6 @@ export default class App extends React.Component {
     }
   };
 
-  shareEmailImage = async () => {
-    const shareOptions = {
-      title: 'Share file',
-      email: 'email@example.com',
-      social: Share1.Social.EMAIL,
-      failOnCancel: false,
-      urls: "https://www.npmjs.com/package/react-native-social-share",
-    };
-
-    try {
-      const ShareResponse = await Share.open(shareOptions);
-      console.log("ShareResponse", ShareResponse);
-      // setResult(JSON.stringify(ShareResponse, null, 2));
-    } catch (error) {
-      console.log('Error =>', error);
-      // setResult('error: '.concat(getErrorString(error)));
-    }
-  };
 
 
 

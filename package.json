@@ -12,12 +12,12 @@
   "dependencies": {
     "react": "16.9.0",
     "react-native": "0.61.3",
+    "react-native-elements": "^2.3.2",
+    "react-native-fs": "^2.16.6",
     "react-native-push-notification": "3.1.9",
-    "react-native-share": "^4.0.4",
     "react-native-search-filter": "^0.1.5",
-    "react-native-vector-icons": "^7.1.0",
-    "react-native-elements": "^2.3.2"
-
+    "react-native-share": "^4.0.4",
+    "react-native-vector-icons": "^7.1.0"
   },
   "devDependencies": {
     "@babel/core": "7.6.4",
