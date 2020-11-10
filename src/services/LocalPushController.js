@@ -1,7 +1,5 @@
 import PushNotification from 'react-native-push-notification'
 import Share from 'react-native-share';
-
-
 const shareEmailImage = async (url) => {
   const shareOptions = {
     title: 'Share file',
@@ -19,7 +17,6 @@ const shareEmailImage = async (url) => {
 };
 
 export const LocalNotification = (url) => {
-  
   PushNotification.localNotification({
     autoCancel: true,
     bigText:

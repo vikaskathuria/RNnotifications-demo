@@ -127,7 +127,7 @@ export default class App extends React.Component {
     if (loading) {
       return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <ActivityIndicator size={'large'} color={"blue"} />
+          <ActivityIndicator size={'large'} color={"orange"} />
         </View>
       )
     }
