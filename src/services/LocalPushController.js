@@ -1,18 +1,8 @@
 import PushNotification from 'react-native-push-notification'
 import Share from 'react-native-share';
 
-// PushNotification.configure({
-//   // (required) Called when a remote or local notification is opened or received
-//   onNotification: function(notification) {
-//     console.log('LOCAL NOTIFICATION ==>', notification)
-//   },
-
-//   popInitialNotification: true,
-//   requestPermissions: true
-// })
 
 const shareEmailImage = async (url) => {
-  alert(url)
   const shareOptions = {
     title: 'Share file',
     email: 'email@example.com', 
@@ -28,7 +18,7 @@ const shareEmailImage = async (url) => {
   }
 };
 
-export const LocalNotification = (item) => {
+export const LocalNotification = (url) => {
   
   PushNotification.localNotification({
     autoCancel: true,
@@ -46,9 +36,8 @@ export const LocalNotification = (item) => {
   PushNotification.configure({
     // (required) Called when a remote or local notification is opened or received
     onNotification: function(notification) {
-      console.log('LOCAL NOTIFICATION123 ==>', notification,"item",item)
-      shareEmailImage(item.url)
-      // alert(item.url)
+      console.log('LOCAL NOTIFICATION123 ==>', notification,"item")
+      shareEmailImage(url)
     },
   
     popInitialNotification: true,
@@ -57,20 +46,3 @@ export const LocalNotification = (item) => {
   
 }
 
-
-export const ScheduledLocalNotification = () => {
-  PushNotification.localNotificationSchedule({
-    autoCancel: true,
-    bigText:
-      'This is local notification demo in React Native app. Only shown, when expanded.',
-    subText: 'Local Notification Demo',
-    title: 'Scheduled Notification Title',
-    message: 'Scheduled Notification Message',
-    vibrate: true,
-    vibration: 500,
-    playSound: true,
-    soundName: 'default',
-    actions: '["Yes", "No"]',
-    date: new Date(Date.now() + 3 * 1000) // in 3 secs
-  })
-}
