@@ -1,16 +1,16 @@
 import React from 'react'
-import { Text, View, Button, StyleSheet, Share, FlatList, Dimensions, ActivityIndicator,TextInput, Keyboard, ImageBackground, TouchableOpacity } from 'react-native'
+import { Text, View, Button, StyleSheet,  FlatList, Dimensions, ActivityIndicator,TextInput, Keyboard, ImageBackground, TouchableOpacity } from 'react-native'
 import {
   LocalNotification,
   ScheduledLocalNotification
 } from './src/services/LocalPushController'
 
 import RemotePushController from './src/services/RemotePushController'
-import Share1 from 'react-native-share';
+import Share from 'react-native-share';
 
 import { Icon } from "react-native-elements";
-import base64url from "base64url";
 import RNFS from 'react-native-fs';
+import base64 from 'react-native-base64'
 
 import { createFilter } from 'react-native-search-filter';
 
@@ -19,7 +19,7 @@ const { width, height } = Dimensions.get("window");
 let few = []
 export const MinMargin = width / 40;
 export const Margin = width / 20;
-
+let a=''
 export default class App extends React.Component {
   constructor(props) {
     super(props)
@@ -33,12 +33,19 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    base64url("ladies and gentlemen we are floating in space")
+    // base64url("ladies and gentlemen we are floating in space")
     // RNFS.readFile("https://s3-us-west-2.amazonaws.com/mediaapidata/images/Soul+Scenes/soul+scenes+057_result.jpg", 'base64')
     // .then(res =>{
     //   console.log("base64",res);
     // });
-    
+    let abc=base64.encode('https://s3-us-west-2.amazonaws.com/mediaapidata/images/Soul+Scenes/soul+scenes+057_result.jpg')
+   let ab= base64.decode(abc)
+    a="data:image/png;base64,"+abc
+    console.log('====================================');
+    console.log(a);
+    console.log(ab);
+
+    console.log('====================================');
 
     this.getImageData()
   }
@@ -143,6 +150,21 @@ export default class App extends React.Component {
     this.setState({ imgData: few })
   }
 
+  shareEmailImage = async () => {
+    const shareOptions = {
+      title: 'Share file',
+      email: 'email@example.com', 
+      social: Share.Social.EMAIL, 
+      failOnCancel: false,
+      urls:[a],
+    };
+  
+    try {
+      const ShareResponse = await Share.open(shareOptions);
+    } catch (error) {
+      console.log('Error =>', error);
+    }
+  };
   render() {
     const { imgData, search,loading,url } = this.state
     if (loading) {
@@ -155,7 +177,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <View style={{ marginTop: 20 }}>
-        <Button title={'Local Push Notification'} onPress={()=>this.handleButtonPress()} />
+        <Button title={'Local Push Notification'} onPress={()=>this.shareEmailImage()} />
       </View>
 
       
