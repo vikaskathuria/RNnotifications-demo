@@ -9,7 +9,7 @@ import RemotePushController from './src/services/RemotePushController'
 import Share1 from 'react-native-share';
 
 import { Icon } from "react-native-elements";
-
+import base64url from "base64url";
 import RNFS from 'react-native-fs';
 
 import { createFilter } from 'react-native-search-filter';
@@ -33,11 +33,11 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-
-    RNFS.readFile("https://s3-us-west-2.amazonaws.com/mediaapidata/images/Soul+Scenes/soul+scenes+057_result.jpg", 'base64')
-    .then(res =>{
-      console.log("base64",res);
-    });
+    base64url("ladies and gentlemen we are floating in space")
+    // RNFS.readFile("https://s3-us-west-2.amazonaws.com/mediaapidata/images/Soul+Scenes/soul+scenes+057_result.jpg", 'base64')
+    // .then(res =>{
+    //   console.log("base64",res);
+    // });
     
 
     this.getImageData()
